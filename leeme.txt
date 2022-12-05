@@ -1,0 +1,54 @@
+El backend se implementa con seguridad usando Spring security y con la base de datos embebida H2 que se carga en memoria 
+para darle simplicidad, Por lo tanto cada vez que se carga el backend se generan algunos usuarios de prueba en la base de datos. 
+Los password se encripta al insertarse con BCryptPasswordEncoder 
+usuarios que se generan para probar he ingresar en el login:
+
+login = Luis6ok
+password = 12345
+login = Maria6ok
+password 12345
+
+CUANDO SE HACE EL LOGIN CORRECTO AL SISTEMA SE GENERA UN JWT QUE SE ALMACENA EN EL LOCALSTORAGE
+ESTE JWT SE ENVIA EN EL HEADER 'Authorization' Y SE VALIDA EN EL BACKEND POR CADA PETICIÓN
+
+ENDPOINTS
+
+POST - http://localhost:8088/api/usuarios/login (RUTA PUBLICA) - LOGIN
+
+{
+    "login" : "Luis6ok",
+    "password" : "12345"
+}
+
+POST - http://localhost:8088/api/usuarios/registro (RUTA PUBLICA) - CREAR USUARIO
+
+{
+    "login" : "usuariox",
+    "password" : "hola",
+    "nombre" : "Juan Carlos",
+    "email" : "juanx@sakicorp.com",
+    "paterno" : "Morales",
+    "materno" : "Hernandez"
+}
+
+
+GET - http://localhost:8088/api/usuarios/buscar?nombre=Luis (RUTA PROTEGIDA Authorization requerida) - BUSCAR POR NOMBRE
+
+GET - http://localhost:8088/api/usuarios/2000-01-01 00:00:00/2010-12-12 00:00:00 (RUTA PROTEGIDA) - BUSCAR POR FECHA
+
+GET - http://localhost:8088/api/usuarios/A (RUTA PROTEGIDA) - BUSCAR POR ESTATUS
+
+PUT - http://localhost:8088/api/usuarios (RUTA PROTEGIDA) - MODIFICAR USUARIO
+
+{
+    "login" : "Luis6ok",
+    "nombre" : "LUIS",
+    "apellidoPaterno" : "RAMIREZ",
+    "apellidoMaterno" : "PEREZ",
+    "status" : "B"
+}
+
+DELETE - http://localhost:8088/api/usuarios?id=Luis6ok (RUTA PROTEGIDA) ELIMINACIÓN LÓGICA, SÓLO SE INACTIVA
+
+FRONTEND - SE USÓ REACT PARA LA IMPLEMENTACION DEL FRONTEND
+
